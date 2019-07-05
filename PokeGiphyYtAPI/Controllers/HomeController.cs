@@ -1,6 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using PokeGiphyYtAPI.Models;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -10,20 +15,27 @@ namespace PokeGiphyYtAPI.Controllers
     {
         public ActionResult Index()
         {
-            return View();
-        }
+            //Create the request to the API
+            WebRequest request = WebRequest.Create("https://pokeapi.co/api/v2/pokemon/1");
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
+            //Send that request off
+            WebResponse respone = request.GetResponse();
 
-            return View();
-        }
+            //Get back the response stram
+            Stream stream = respone.GetResponseStream();
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
+            //Make it accessible
+            StreamReader reader = new StreamReader(stream);
 
+            //Put into string , which is json formatted
+            string resposneFromServer = reader.ReadToEnd();
+
+            JObject parsedString = JObject.Parse(resposneFromServer);
+            Pokemon myPokemon = parsedString.ToObject<Pokemon>();
+
+            Debug.WriteLine(myPokemon.moves[0].move.name);
+
+            //Get back the response stream 
             return View();
         }
     }
