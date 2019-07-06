@@ -1,0 +1,11 @@
+﻿@model YoutubeAPI.Models.YoutubeSearch
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@foreach(var item in Model.items)
+{
+    <img src="@item.snippet.thumbnails.high.url"/>
+    <p>@item.snippet.title</p>
+}

@@ -1,3 +1,4 @@
 <appSettings>
 	<add key="giphyAPIKey" value="wxVi2A9cWtcfAzH97f8k6ttg836E8ae3"/>
+	<add key="ytAPIKey" value="AIzaSyCUmxWGFvM3reFPHxAt6i7OgRPJYHSF3k4"/>
 </appSettings>
