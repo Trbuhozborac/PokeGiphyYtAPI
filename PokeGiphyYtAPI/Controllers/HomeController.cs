@@ -16,7 +16,7 @@ namespace PokeGiphyYtAPI.Controllers
         public ActionResult Index()
         {
             //Create the request to the API
-            WebRequest request = WebRequest.Create("https://pokeapi.co/api/v2/pokemon/1");
+            WebRequest request = WebRequest.Create("https://pokeapi.co/api/v2/pokemon/100");
 
             //Send that request off
             WebResponse respone = request.GetResponse();
@@ -32,11 +32,8 @@ namespace PokeGiphyYtAPI.Controllers
 
             JObject parsedString = JObject.Parse(resposneFromServer);
             Pokemon myPokemon = parsedString.ToObject<Pokemon>();
-
-            Debug.WriteLine(myPokemon.moves[0].move.name);
-
-            //Get back the response stream 
-            return View();
+           
+            return View(myPokemon);
         }
     }
 }
